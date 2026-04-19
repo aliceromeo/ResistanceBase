@@ -1,0 +1,654 @@
+-- MySQL dump 10.13  Distrib 8.0.15, for Linux (x86_64)
+--
+-- Host: localhost    Database: ResistanceBase
+-- ------------------------------------------------------
+-- Server version	8.0.15
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+ SET NAMES utf8mb4 ;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `ResistanceBase`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `ResistanceBase` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+
+USE `ResistanceBase`;
+
+--
+-- Table structure for table `ant`
+--
+
+DROP TABLE IF EXISTS `ant`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ant` (
+  `ant_id` char(7) NOT NULL,
+  `nome_a` varchar(30) NOT NULL,
+  `formula` varchar(20) NOT NULL,
+  `mw` int(11) NOT NULL,
+  `subcl` char(5) NOT NULL,
+  PRIMARY KEY (`ant_id`),
+  KEY `subcl` (`subcl`),
+  CONSTRAINT `ant_ibfk_1` FOREIGN KEY (`subcl`) REFERENCES `subclass` (`sub_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ant`
+--
+
+LOCK TABLES `ant` WRITE;
+/*!40000 ALTER TABLE `ant` DISABLE KEYS */;
+INSERT INTO `ant` VALUES ('J01AA07','Tetraciclina','C22H24N2O8',444,'J01AA'),('J01AA12','Tigeciclina','C29H39N5O8',586,'J01AA'),('J01BA01','Cloramfenicolo','C11H12Cl2N2O5',323,'J01BA'),('J01CA03','Carbenicillina','C17H16N2O6S',422,'J01CA'),('J01EA01','Trimetropim','(C14H18N4O3)2',679,'J01EA'),('J01FA01','Eritromicina','C37H67NO13',734,'J01FA'),('J01FF02','Lincomicina','C18H34N2O6S',407,'J01FF'),('J01GA01','Streptomicina','(C21H39N7O12)2',1457,'J01GA'),('J01GB03','Gentamicina','C19H37N5O7',601,'J01GB'),('J01GB04','Kanamicina','C18H36N4O11',401,'J01GB'),('J01MA02','Ciprofloxacina','C17H18FN3O3',331,'J01MA');
+/*!40000 ALTER TABLE `ant` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `art`
+--
+
+DROP TABLE IF EXISTS `art`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `art` (
+  `pmid` int(11) NOT NULL,
+  `autore` varchar(30) NOT NULL,
+  `riv` int(11) NOT NULL,
+  `issue` int(11) NOT NULL,
+  `pag` varchar(10) NOT NULL,
+  `titolo` varchar(200) NOT NULL,
+  PRIMARY KEY (`pmid`),
+  KEY `riv` (`riv`),
+  CONSTRAINT `art_ibfk_1` FOREIGN KEY (`riv`) REFERENCES `riv` (`cod`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `art`
+--
+
+LOCK TABLES `art` WRITE;
+/*!40000 ALTER TABLE `art` DISABLE KEYS */;
+INSERT INTO `art` VALUES (319453,'Musso, R',1,1,'106-10','Nucleotide sequence of the operator-promoter region of the galactose operon of Escherichia coli.'),(383387,'Sutcliffe, JG',2,1,'77-90','Complete nucleotide sequence of the Escherichia coli plasmid pBR322.'),(1479961,'Zhao, J',3,10,'1051-60','Nucleotide sequence analysis of the class G tetracycline resistance determinant from Vibrio anguillarum.'),(1648560,'Bissonnette, L',4,14,'4493-502','Characterization of the nonenzymatic chloramphenicol resistance (cmlA) gene of the In4 integron of Tn1696: similarity of the product to transmembrane transport proteins.'),(1846135,'Speer, BS',4,1,'176-83','Evidence that a novel tetracycline resistance gene found on two Bacteroides transposons encodes an NADP-requiring oxidoreductase.'),(2118530,'Trias, J',5,26,'15680-4','Protein D2 channel of the Pseudomonas aeruginosa outer membrane has a binding site for basic amino acids and peptides.'),(2653965,'Scholz, P',6,2,'271-88','Complete nucleotide sequence and gene organization of the broad-host-range plasmid RSF1010.'),(2841293,'LeBlanc, DJ',7,8,'3618-26','Nucleotide sequence analysis of tetracycline resistance gene tetO from Streptococcus mutans DL5.'),(3020504,'Martin, P',8,17,'7047-58','Nucleotide sequence of the tetM tetracycline resistance determinant of the streptococcal conjugative shuttle transposon Tn1545.'),(3024112,'Cameron, FH',8,21,'8625-35','Nucleotide sequence of the AAD(2\') aminoglycoside adenylyltransferase determinant aadB. Evolutionary relationship of this region with those surrounding aadA in R538-1 and dhfrII in R388.'),(3091456,'Brisson-Noël, A',9,3,'247-53','Nucleotide sequence of gene linA encoding resistance to lincosamides in Staphylococcus haemolyticus.'),(3241623,'Tovar, K',10,1,'76-80','Identification and nucleotide sequence of the class E tet regulatory elements and operator and inducer binding of the encoded purified Tet repressor.'),(4876466,'Terawaki, Y',11,5151,'284-5','Temperature sensitivity of cell growth in Escherichia coli associated with the temperature sensitive R(KM) factor.'),(6304468,'Yamamoto, T',12,2,'282-8','Tn2610, a transposon involved in the spread of the carbenicillin-hydrolyzing beta-lactamase gene.'),(6310527,'Waters, SH',13,17,'6089-105','The tetracycline resistance determinants of RP1 and Tn1721: nucleotide sequence analysis.'),(6319234,'Nguyen, TT',14,1,'83-92','Sequence homology between the tetracycline-resistance determinants of Tn10 and pBR322.'),(6657777,'Khan, SA',15,3,'251-9','Complete nucleotide sequence of pT181, a tetracycline-resistance plasmid from Staphylococcus aureus.'),(7916584,'Varela, MF',16,6,'1253-8','Nucleotide and deduced protein sequences of the class D tetracycline resistance determinant: relationship to other antimicrobial transport proteins.'),(7968531,'Poole, K',15,3,'529-44','Cloning and sequence analysis of an EnvCD homologue in Pseudomonas aeruginosa: regulation by iron and possible involvement in the secretion of the siderophore pyoverdine.'),(8109938,'Hansen, LM',16,12,'2699-705','A new tetracycline resistance determinant, Tet H, from Pasteurella multocida specifying active efflux of tetracycline.'),(8226684,'Poole, K',17,22,'7363-72','Multiple antibiotic resistance in Pseudomonas aeruginosa: evidence for involvement of an efflux operon.'),(8385262,'Shaw, KJ',18,1,'138-63','Molecular genetics of aminoglycoside resistance genes and familial relationships of the aminoglycoside-modifying enzymes.'),(8540696,'Li, XZ',19,9,'1948-53','Role of mexA-mexB-oprM in antibiotic efflux in Pseudomonas aeruginosa.'),(8878035,'Poole, K',20,4,'713-24','Overexpression of the mexC-mexD-oprJ efflux operon in nfxB-type multidrug-resistant strains of Pseudomonas aeruginosa.'),(9044268,'Köhler, T',21,2,'345-54','Characterization of MexE-MexF-OprN, a positively regulated multidrug efflux system of Pseudomonas aeruginosa.'),(9292992,'Scott, KP',22,9,'3405-11','High-frequency transfer of a naturally occurring chromosomal tetracycline resistance element in the ruminal anaerobe Butyrivibrio fibrisolvens.'),(9384377,'Kunst, F',23,6657,'249-56','The complete genome sequence of the gram-positive bacterium Bacillus subtilis.'),(9400512,'Hiramatsu, K',24,9092,'1670-3','Dissemination in Japanese hospitals of strains of Staphylococcus aureus heterogeneously resistant to vancomycin.'),(9631545,'Heir, E',25,1,'49-56','The Staphylococcus qacH gene product: a new member of the SMR family encoding multidrug resistance.'),(9687386,'De Rossi, E',26,8,'1931-7','Molecular cloning and functional analysis of a novel tetracycline resistance determinant, tet(V), from Mycobacterium smegmatis.'),(9838156,'Magalhães, VD',27,1,'262-6','A new tetracycline resistance determinant cloned from Proteus mirabilis.'),(10582867,'Roberts, MC',9,12,'2823-30','Nomenclature for macrolide and macrolide-lincosamide-streptogramin B resistance determinants.'),(10952301,'Heidelberg, JF',28,6795,'477-83','DNA sequence of both chromosomes of the cholera pathogen Vibrio cholerae.'),(11083623,'Kotra, LP',29,12,'3249-56','Aminoglycosides: perspectives on mechanisms of action and resistance and strategies to counter resistance.'),(11381101,'Chopra, I',30,2,'232-60','Tetracycline antibiotics: mode of action, applications, molecular biology, and epidemiology of bacterial resistance.'),(11709311,'Magnet, S',31,12,'3375-80','Resistance-nodulation-cell division-type efflux pump involved in aminoglycoside resistance in Acinetobacter baumannii strain BM4454.'),(15377793,'Nierman, WC',32,39,'14246-51','Structural flexibility in the Burkholderia mallei genome.'),(15377794,'Holden, MT',32,39,'14240-5','Genomic plasticity of the causative agent of melioidosis, Burkholderia pseudomallei.');
+/*!40000 ALTER TABLE `art` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `atc`
+--
+
+DROP TABLE IF EXISTS `atc`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `atc` (
+  `atc_id` char(4) NOT NULL,
+  `nome_atc` varchar(50) NOT NULL,
+  `target` varchar(50) NOT NULL,
+  `path` char(4) NOT NULL,
+  PRIMARY KEY (`atc_id`),
+  KEY `path` (`path`),
+  CONSTRAINT `atc_ibfk_1` FOREIGN KEY (`path`) REFERENCES `pathway` (`path_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `atc`
+--
+
+LOCK TABLES `atc` WRITE;
+/*!40000 ALTER TABLE `atc` DISABLE KEYS */;
+INSERT INTO `atc` VALUES ('J01A','Tetracicline','Subunità ribosomale 30S','P03'),('J01B','Amfenicoli','Subunità ribosomale 50S','P03'),('J01C','Antibiotici beta lattamici, penicillina','Transpeptidasi','P01'),('J01D','Altri antibiotici beta-lattamici','Transpeptidasi','P01'),('J01E','Sulfonamidi e trimetroprim','Enzima diidropteroato sintasi','P02'),('J01F','Macrolidi, lincosamidi e streptogrammine','rRNA 23S della subunita ribosomiale 50S','P03'),('J01G','Antibiotici aminoglucosidici','rRNA 16S della subunità ribosomale 30S','P03'),('J01M','Chinoloni antibiotici','DNA girasi','P04');
+/*!40000 ALTER TABLE `atc` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bat`
+--
+
+DROP TABLE IF EXISTS `bat`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `bat` (
+  `bat_id` int(11) NOT NULL,
+  `nome_sp` varchar(100) NOT NULL,
+  `fam` int(11) NOT NULL,
+  PRIMARY KEY (`bat_id`),
+  KEY `fam` (`fam`),
+  CONSTRAINT `bat_ibfk_1` FOREIGN KEY (`fam`) REFERENCES `fam` (`fam_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bat`
+--
+
+LOCK TABLES `bat` WRITE;
+/*!40000 ALTER TABLE `bat` DISABLE KEYS */;
+INSERT INTO `bat` VALUES (287,'Pseudomonas aeruginosa',1),(294,'Pseudomonas fluorescens',1),(470,'Acinetobacter baumannii',2),(550,'Enterobacter cloacae',3),(562,'Escherichia coli',3),(571,'Klebsiella pneumoniae',3),(584,'Proteus mirabilis',4),(602,'Salmonella typhimurium',3),(624,'Shigella sonnei',3),(645,'Aeromonas salmonicida',5),(715,'Actinobacillus pleuropneumoniae',6),(817,'Bacteroides fragilis',7),(831,'Butyrivibrio fibrisolvens',8),(1286,'Staphylococcus simulans',9),(1307,'Streptococcus suis',10),(1314,'Streptococcus pyogenes',10),(1422,'Geobacillus stearothermophilus',11),(1423,'Bacillus subtilis',11),(1894,'Streptomyces aureofaciens',13),(1915,'Streptomyces lincolnensis',13),(28901,'Salmonella enterica',3),(42858,'Staphylococcus lentus',9),(43765,'Corynebacterium amycolatum',14),(63846,'Streptomyces sp. ASSF13',13),(196600,'Vibrio vulnificus',15),(246196,'Mycobacterium smegmatis',16),(267608,'Ralstonia solanacearum',17),(320389,'Burkholderia mallei',17),(339670,'Burkholderia ambifaria',17),(350701,'Burkholderia dolosa',17),(406562,'Streptococcus pneumoniae',10),(419109,'Vibrio parahaemolyticus',15);
+/*!40000 ALTER TABLE `bat` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `classe`
+--
+
+DROP TABLE IF EXISTS `classe`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `classe` (
+  `class_id` varchar(15) NOT NULL,
+  `mec` char(4) NOT NULL,
+  PRIMARY KEY (`class_id`),
+  KEY `mec` (`mec`),
+  CONSTRAINT `classe_ibfk_1` FOREIGN KEY (`mec`) REFERENCES `mec` (`mec_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `classe`
+--
+
+LOCK TABLES `classe` WRITE;
+/*!40000 ALTER TABLE `classe` DISABLE KEYS */;
+INSERT INTO `classe` VALUES ('ere','M01'),('tet_mod','M01'),('aac','M03'),('ant','M03'),('aph','M03'),('lnu','M03'),('adeabc','M04'),('ceo','M04'),('cml','M04'),('mdt','M04'),('mex','M04'),('mls_mfs','M04'),('norm','M04'),('pmra','M04'),('tet_efflux','M04'),('tet_rpp','M07');
+/*!40000 ALTER TABLE `classe` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ec`
+--
+
+DROP TABLE IF EXISTS `ec`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ec` (
+  `ec_id` varchar(15) NOT NULL,
+  `nome_e` varchar(100) NOT NULL,
+  `reazione` varchar(150) NOT NULL,
+  `gruppo` char(3) NOT NULL,
+  PRIMARY KEY (`ec_id`),
+  KEY `gruppo` (`gruppo`),
+  CONSTRAINT `ec_ibfk_1` FOREIGN KEY (`gruppo`) REFERENCES `gruppo` (`group_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ec`
+--
+
+LOCK TABLES `ec` WRITE;
+/*!40000 ALTER TABLE `ec` DISABLE KEYS */;
+INSERT INTO `ec` VALUES ('EC 2.3.1.81','Aminoglicoside N(3)-acetiltransferasi','Acetyl-CoA + a 2-deossistreptamina <=> CoA + N(3)-acetil-2-deossostreptamina','EC2'),('EC 2.7.1.190','Aminoglicoside 2\'-fosfotransferasi','GTP + gentamicina <=> GDP + gentamicina 2\'-fosfato','EC2'),('EC 2.7.7.46','Gentamicina 2\'-nucleotidiltransferasi','Nucleoside trifosfato + gentamicina <=> difosfato + 2\'-nucleotidilgentamicina','EC2'),('EC 3.1.1.1','Carbossilesterasi','Estere carbossilico + H(2)O <=> 1 alcol + 1 carbossilato','EC3'),('EC 7.2.1.2','Ferredossina--NAD(+) ossidoreduttasi','2 ferredossina ridotta [Fe-Zn] + NAD(+) + H(+) + Na(+) <=> 2 ferredossina ossidata [Fe-Zn] + NADH + Na(+)','EC7');
+/*!40000 ALTER TABLE `ec` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `enzima`
+--
+
+DROP TABLE IF EXISTS `enzima`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `enzima` (
+  `prot` varchar(15) NOT NULL,
+  `ec` varchar(15) NOT NULL,
+  PRIMARY KEY (`prot`,`ec`),
+  KEY `ec` (`ec`),
+  CONSTRAINT `enzima_ibfk_1` FOREIGN KEY (`prot`) REFERENCES `prot` (`prot_id`) ON UPDATE CASCADE,
+  CONSTRAINT `enzima_ibfk_2` FOREIGN KEY (`ec`) REFERENCES `ec` (`ec_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `enzima`
+--
+
+LOCK TABLES `enzima` WRITE;
+/*!40000 ALTER TABLE `enzima` DISABLE KEYS */;
+INSERT INTO `enzima` VALUES ('AAA16194','EC 2.3.1.81'),('AAA25680','EC 2.3.1.81'),('AAU09447','EC 2.3.1.81'),('ABO41023','EC 2.3.1.81'),('AAC98719','EC 2.7.1.190'),('CAA30578','EC 2.7.1.190'),('CAA88266','EC 2.7.1.190'),('AAA25683','EC 2.7.7.46'),('AAP74962','EC 2.7.7.46'),('AAS79146','EC 2.7.7.46'),('AAT38947','EC 2.7.7.46'),('ABB99436','EC 2.7.7.46'),('ABO46016','EC 2.7.7.46'),('BAA06249','EC 2.7.7.46'),('CAI40606','EC 2.7.7.46'),('YP_758627','EC 2.7.7.46'),('CAA27626','EC 3.1.1.1'),('CAJ29622','EC 3.1.1.1'),('AAA27471','EC 7.2.1.2');
+/*!40000 ALTER TABLE `enzima` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `fam`
+--
+
+DROP TABLE IF EXISTS `fam`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `fam` (
+  `fam_id` int(11) NOT NULL,
+  `nome_f` varchar(50) NOT NULL,
+  PRIMARY KEY (`fam_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `fam`
+--
+
+LOCK TABLES `fam` WRITE;
+/*!40000 ALTER TABLE `fam` DISABLE KEYS */;
+INSERT INTO `fam` VALUES (1,'Pseudomonaceae'),(2,'Moraxellaceae'),(3,'Enterobacteriaceae'),(4,'Morganellaceae'),(5,'Aeromodanaceae'),(6,'Pasteurellaceae'),(7,'Bacterioidaceae'),(8,'Lachnospiraceae'),(9,'Staphylococcaceae'),(10,'Streptococcaceae'),(11,'Bacillaceae'),(12,'Clostridiaceae'),(13,'Streptomycetaceae'),(14,'Corynebacteriaceae'),(15,'Vibrionaceae'),(16,'Mycobacteriaceae'),(17,'Burkholderiaceae');
+/*!40000 ALTER TABLE `fam` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `funz`
+--
+
+DROP TABLE IF EXISTS `funz`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `funz` (
+  `funz_id` char(10) NOT NULL,
+  `term` varchar(50) NOT NULL,
+  `tipo_f` enum('BP','CC','MF') NOT NULL,
+  PRIMARY KEY (`funz_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `funz`
+--
+
+LOCK TABLES `funz` WRITE;
+/*!40000 ALTER TABLE `funz` DISABLE KEYS */;
+INSERT INTO `funz` VALUES ('GO:0003746','Fattore di allungamento della traduzione','CC'),('GO:0003824','Attività ossido-reduttasica','MF'),('GO:0004324','Ferredossina-NADP+ reduttasi','CC'),('GO:0006412','Traduzione','BP'),('GO:0006811','Trasporto di ioni','BP'),('GO:0008135','Legame dell\'RNA','MF'),('GO:0008493','Trasportatore transmembrana della tetraciclina','CC'),('GO:0010468','Regolazione dell\'espressione genica','BP'),('GO:0015399','Trasporto attivo primario transmembrana','BP'),('GO:0015562','Trasportatore transmembrana di efflusso','CC'),('GO:0015665','Trasporto transmembrana di composti alcolici','MF'),('GO:0015893','Trasporto di farmaci','BP'),('GO:0016301','Attivià chinasica','MF'),('GO:0016310','Fosforilazione','BP'),('GO:0016491','Processo di ossido-riduzione','BP'),('GO:0016740','Attività transferasica','MF'),('GO:0016773','Attività fosfotransferasica su gruppi alcolici','MF'),('GO:0016787','Attività idrolasica','MF'),('GO:0016788','Idrolasi','CC'),('GO:0022402','Ciclo cellulare','BP'),('GO:0031968','G0/G1 switch protein 2','CC'),('GO:0034068','Aminoglicoside nucleotidiltransferasi','CC'),('GO:0034069','Aminoglicoside N-acetiltransferasi','CC'),('GO:0034071','Aminoglicoside fosfotransferasi','CC'),('GO:0042910','Trasportatore transmembrana di xenobiotici','CC'),('GO:0043190','Trasportatore ABC','CC'),('GO:0045023','Transizione G0-G1','BP'),('GO:0055085','Trasporto transmembrana','BP'),('GO:0090079','Regolazione della traduzione','MF'),('GO:0098796','Complesso transmembrana','CC');
+/*!40000 ALTER TABLE `funz` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gruppo`
+--
+
+DROP TABLE IF EXISTS `gruppo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `gruppo` (
+  `group_id` char(3) NOT NULL,
+  `nome_gr` varchar(20) NOT NULL,
+  `descr` varchar(100) NOT NULL,
+  `reaz_gr` varchar(50) NOT NULL,
+  PRIMARY KEY (`group_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gruppo`
+--
+
+LOCK TABLES `gruppo` WRITE;
+/*!40000 ALTER TABLE `gruppo` DISABLE KEYS */;
+INSERT INTO `gruppo` VALUES ('EC1','Ossidoreduttasi','Trasferimento di atomi di idrogeno e di ossigeno, o di elettroni da una molecola a un\'altra','AH + B → A + BH (ridotta) // A + O → AO (ossidata)'),('EC2','Transferasi','Trasferimento di un gruppo funzionale da un substrato a un altro','AB + C → A + BC'),('EC3','Idrolasi','Formazione di due prodotti a partire da un substrato attraverso una idrolisi','AB + H2O → AOH + BH'),('EC4','Liasi','Addizione o rimozione non-idrolitica di gruppi funzionali dal substrato','RCOCOOH → RCOH + CO2'),('EC5','Isomerasi','Riarrangiamento intramolecolare','AB → BA'),('EC6','Ligasi','Unione di due molecole attraverso la costituzione di nuovi legami covalenti','X + Y+ ATP → XY + ADP + Pi '),('EC7','Translocasi','Movimento di molecole o ioni attraverso le membrane','A+TR(IN/OUT) → A+TR(OUT/IN)');
+/*!40000 ALTER TABLE `gruppo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mec`
+--
+
+DROP TABLE IF EXISTS `mec`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `mec` (
+  `mec_id` char(4) NOT NULL,
+  `azione` varchar(100) NOT NULL,
+  PRIMARY KEY (`mec_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mec`
+--
+
+LOCK TABLES `mec` WRITE;
+/*!40000 ALTER TABLE `mec` DISABLE KEYS */;
+INSERT INTO `mec` VALUES ('M01','Distruzione enzimatica dell\'antibiotico'),('M02','Modificazione del target dell\'antibiotico'),('M03','Modificazione chimica dell\'antibiotico'),('M04','Efflusso dell\'antibiotico'),('M05','Diminuzione della penetrazione cellulare dell\'antibiotico'),('M06','Sostituzione del target dell\'antibiotico'),('M07','Protezione del target dell\'antibiotico');
+/*!40000 ALTER TABLE `mec` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mut`
+--
+
+DROP TABLE IF EXISTS `mut`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `mut` (
+  `tipo` varchar(50) NOT NULL,
+  `descr` varchar(300) NOT NULL,
+  PRIMARY KEY (`tipo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mut`
+--
+
+LOCK TABLES `mut` WRITE;
+/*!40000 ALTER TABLE `mut` DISABLE KEYS */;
+INSERT INTO `mut` VALUES ('Delezione frameshift','Delezione di un numero di nucleotidi non divisibile per 3, che comporta lo spostamento della cornice di lettura a valle della mutazione e quindi la codificazione di una sequenza amminoacidica non corrispondente a quella del trascritto originario'),('Delezione in frame','Eliminazione di una tripletta o di un numero di nucleotidi divisibili per 3 che non spostano la cornice di lettura a livello ribosomiale e determinano l\'eliminazione di amminoacidi nella proteina codificata'),('Espansione di triplette','Variazione nel numero di ripetizioni di brevi triplette nucleotidiche all\'interno di una regione codificante'),('Inserzione frameshift','Inserzione di un numero di nucleotidi non divisibile per 3, che comporta lo spostamento della cornice di lettura a valle della mutazione e quindi la codificazione di una sequenza amminoacidica non corrispondente a quella del trascritto originario'),('Inserzione in frame','Inserzione di una tripletta o di un numero di nucleotidi divisibili per 3 che non spostano la cornice di lettura a livello ribosomiale e determinano l\'aggiunta di amminoacidi nella proteina codificata'),('Mutazione missenso','Mutazione di una coppia di basi del DNA che risulta nella sostituzione di un aminoacido per un altro nella sequenza proteica'),('Mutazione nonsenso','Mutazione di una coppia di basi del DNA che risulta nella terminazione prematura della traduzione del gene'),('Mutazioni di splicing','Mutazioni che coinvolgono sequenze importanti per lo splicing del pre-mRNA');
+/*!40000 ALTER TABLE `mut` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pathway`
+--
+
+DROP TABLE IF EXISTS `pathway`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `pathway` (
+  `path_id` char(4) NOT NULL,
+  `nome_p` varchar(100) NOT NULL,
+  PRIMARY KEY (`path_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pathway`
+--
+
+LOCK TABLES `pathway` WRITE;
+/*!40000 ALTER TABLE `pathway` DISABLE KEYS */;
+INSERT INTO `pathway` VALUES ('P01','Biosintesi peptidoglicano'),('P02','Sintesi acido tetraidrofolico'),('P03','Sintesi proteica'),('P04','Replicazione del DNA');
+/*!40000 ALTER TABLE `pathway` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `prot`
+--
+
+DROP TABLE IF EXISTS `prot`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `prot` (
+  `prot_id` varchar(15) NOT NULL,
+  `nome_pr` varchar(10) NOT NULL,
+  `residui` int(11) NOT NULL,
+  `mw` int(11) NOT NULL,
+  `seq` varchar(20) NOT NULL,
+  PRIMARY KEY (`prot_id`),
+  KEY `seq` (`seq`),
+  CONSTRAINT `prot_ibfk_1` FOREIGN KEY (`seq`) REFERENCES `seq` (`seq_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `prot`
+--
+
+LOCK TABLES `prot` WRITE;
+/*!40000 ALTER TABLE `prot` DISABLE KEYS */;
+INSERT INTO `prot` VALUES ('AAA16194','prot3',1166,228,'M88012'),('AAA25680','prot5',652,68,'L06163'),('AAA25683','prot15',523,88,'L06161'),('AAA27471','prot92',442,72,'M37699'),('AAC98719','prot26',898,106,'AF012543'),('AAD12753','prot85',776,76,'AF038993'),('AAF01499','prot89',1126,161,'L42544'),('AAL14441','prot12',403,46,'AF370885'),('AAL75559','prot81',1124,122,'AF467073'),('AAP74962','prot18',944,122,'AY309066'),('AAR14158','prot84',330,56,'AY362554'),('AAS79146','prot13',738,112,'AY507153'),('AAT38947','prot16',399,73,'AY612612'),('AAU09447','prot1',374,33,'AY663802'),('ABA56512','prot41',689,135,'DQ205477'),('ABB99436','prot19',301,26,'DQ287356'),('ABE03748','prot42',343,32,'DQ445306'),('ABI90248','prot39',134,23,'CP000441'),('ABK74430','prot90',709,73,'CP000480'),('ABO01902','prot31',513,69,'CP000547'),('ABO25866','prot87',518,74,'EF101931'),('ABO30517','prot82',1274,243,'EF439629'),('ABO41023','prot4',1164,179,'CP000604'),('ABO46016','prot17',1310,183,'EF467306'),('ABO87315','prot88',289,31,'EF363199'),('ABR81440','prot63',1086,87,'CP000744'),('ABR85446','prot65',294,52,'CP000744'),('ABR86572','prot57',1126,174,'CP000744'),('BAA06249','prot9',889,120,'D29979'),('BAA22228','prot50',1054,197,'AB000617'),('BAC94494','prot67',524,66,'BA000037'),('CAA27626','prot48',1270,115,'X03988'),('CAA30578','prot25',516,79,'X07753'),('CAA42550','prot49',1068,99,'X59926'),('CAA88266','prot21',520,82,'Z48231'),('CAC21193','prot83',1285,154,'Y19118'),('CAD20560','prot91',443,78,'AJ427421'),('CAF31521','prot76',288,39,'AJ628353'),('CAI40606','prot14',439,35,'AJ871915'),('CAJ29622','prot47',1053,125,'AJ971344'),('CAJ77844','prot11',489,81,'CT025812'),('CAM91612','prot79',1087,142,'AM412236'),('EAY71134','prot32',350,26,'CH482381'),('EAZ54783','prot56',1124,203,'CH482383'),('EAZ61950','prot70',257,48,'CH482384'),('EDK55609','prot40',148,23,'DS264095'),('EDK71791','prot73',350,65,'ABAF01000001'),('NP_521874','prot62',475,38,'NC_003296'),('YP_001025937','prot33',1260,214,'NC_008835'),('YP_001025938','prot38',592,101,'NC_008835'),('YP_001078027','prot36',592,52,'NC_009079'),('YP_001345921','prot59',624,70,'NC_009656'),('YP_001345922','prot71',753,100,'NC_009656'),('YP_001348103','prot72',1146,127,'NC_009656'),('YP_001350571','prot60',622,74,'NC_009656'),('YP_209652','prot86',316,53,'NC_006871'),('YP_758627','prot51',624,87,'NC_008351'),('YP_776583','prot34',497,46,'NC_008391'),('ZP_00711942','prot53',677,127,'NZ_AAJX01000005'),('ZP_00711943','prot55',677,63,'NZ_AAJX01000005'),('ZP_00927253','prot54',1284,136,'NZ_AAMK01000001'),('ZP_00927254','prot52',1284,192,'NZ_AAMK01000001'),('ZP_00930809','prot35',826,127,'NZ_AAIQ02000013'),('ZP_00965695','prot61',950,114,'NZ_AAKV01000108'),('ZP_00967075','prot58',950,116,'NZ_AAKV01000077'),('ZP_00969234','prot64',1229,174,'NZ_AAKV01000024'),('ZP_00969235','prot66',1216,226,'NZ_AAKV01000024'),('ZP_00983869','prot37',1284,96,'NZ_AAKY01000184'),('ZP_00983916','prot69',918,156,'NZ_AAKY01000183'),('ZP_01993435','prot68',1270,129,'NZ_AAWQ01000512');
+/*!40000 ALTER TABLE `prot` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `protfunz`
+--
+
+DROP TABLE IF EXISTS `protfunz`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `protfunz` (
+  `prot` varchar(15) NOT NULL,
+  `funz` char(10) NOT NULL,
+  PRIMARY KEY (`prot`,`funz`),
+  KEY `funz` (`funz`),
+  CONSTRAINT `protfunz_ibfk_1` FOREIGN KEY (`prot`) REFERENCES `prot` (`prot_id`) ON UPDATE CASCADE,
+  CONSTRAINT `protfunz_ibfk_2` FOREIGN KEY (`funz`) REFERENCES `funz` (`funz_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `protfunz`
+--
+
+LOCK TABLES `protfunz` WRITE;
+/*!40000 ALTER TABLE `protfunz` DISABLE KEYS */;
+INSERT INTO `protfunz` VALUES ('AAF01499','GO:0003746'),('ABO25866','GO:0003746'),('ABO87315','GO:0003746'),('CAD20560','GO:0003746'),('AAA27471','GO:0003824'),('AAA27471','GO:0004324'),('AAF01499','GO:0006412'),('ABO25866','GO:0006412'),('ABO87315','GO:0006412'),('CAD20560','GO:0006412'),('AAD12753','GO:0006811'),('AAL14441','GO:0006811'),('AAL75559','GO:0006811'),('AAR14158','GO:0006811'),('ABK74430','GO:0006811'),('ABO30517','GO:0006811'),('CAC21193','GO:0006811'),('CAF31521','GO:0006811'),('CAJ77844','GO:0006811'),('CAM91612','GO:0006811'),('YP_209652','GO:0006811'),('AAF01499','GO:0008135'),('ABO25866','GO:0008135'),('ABO87315','GO:0008135'),('CAD20560','GO:0008135'),('AAD12753','GO:0008493'),('AAL75559','GO:0008493'),('AAR14158','GO:0008493'),('ABK74430','GO:0008493'),('ABO30517','GO:0008493'),('CAC21193','GO:0008493'),('CAF31521','GO:0008493'),('CAM91612','GO:0008493'),('YP_209652','GO:0008493'),('AAF01499','GO:0010468'),('ABO25866','GO:0010468'),('ABO87315','GO:0010468'),('CAD20560','GO:0010468'),('AAL14441','GO:0015399'),('CAJ77844','GO:0015399'),('ABA56512','GO:0015562'),('ABE03748','GO:0015562'),('ABI90248','GO:0015562'),('ABO01902','GO:0015562'),('ABR81440','GO:0015562'),('ABR85446','GO:0015562'),('ABR86572','GO:0015562'),('BAA22228','GO:0015562'),('BAC94494','GO:0015562'),('CAA42550','GO:0015562'),('EAY71134','GO:0015562'),('EAZ54783','GO:0015562'),('EAZ61950','GO:0015562'),('EDK55609','GO:0015562'),('EDK71791','GO:0015562'),('NP_521874','GO:0015562'),('YP_001025937','GO:0015562'),('YP_001025938','GO:0015562'),('YP_001078027','GO:0015562'),('YP_001345921','GO:0015562'),('YP_001345922','GO:0015562'),('YP_001348103','GO:0015562'),('YP_001350571','GO:0015562'),('YP_776583','GO:0015562'),('ZP_00711942','GO:0015562'),('ZP_00711943','GO:0015562'),('ZP_00927253','GO:0015562'),('ZP_00927254','GO:0015562'),('ZP_00930809','GO:0015562'),('ZP_00965695','GO:0015562'),('ZP_00967075','GO:0015562'),('ZP_00969234','GO:0015562'),('ZP_00969235','GO:0015562'),('ZP_00983869','GO:0015562'),('ZP_01993435','GO:0015562'),('AAD12753','GO:0015665'),('AAL75559','GO:0015665'),('AAR14158','GO:0015665'),('ABK74430','GO:0015665'),('ABO30517','GO:0015665'),('CAC21193','GO:0015665'),('CAF31521','GO:0015665'),('CAM91612','GO:0015665'),('YP_209652','GO:0015665'),('AAA16194','GO:0015893'),('AAA25680','GO:0015893'),('AAD12753','GO:0015893'),('AAL14441','GO:0015893'),('AAL75559','GO:0015893'),('AAR14158','GO:0015893'),('AAU09447','GO:0015893'),('ABA56512','GO:0015893'),('ABE03748','GO:0015893'),('ABI90248','GO:0015893'),('ABK74430','GO:0015893'),('ABO01902','GO:0015893'),('ABO30517','GO:0015893'),('ABO41023','GO:0015893'),('ABR81440','GO:0015893'),('ABR85446','GO:0015893'),('ABR86572','GO:0015893'),('BAA22228','GO:0015893'),('CAA42550','GO:0015893'),('CAC21193','GO:0015893'),('CAF31521','GO:0015893'),('CAJ77844','GO:0015893'),('CAM91612','GO:0015893'),('EAY71134','GO:0015893'),('EAZ54783','GO:0015893'),('EDK55609','GO:0015893'),('EDK71791','GO:0015893'),('NP_521874','GO:0015893'),('YP_001025937','GO:0015893'),('YP_001025938','GO:0015893'),('YP_001078027','GO:0015893'),('YP_001345921','GO:0015893'),('YP_001345922','GO:0015893'),('YP_001348103','GO:0015893'),('YP_001350571','GO:0015893'),('YP_209652','GO:0015893'),('YP_776583','GO:0015893'),('ZP_00711942','GO:0015893'),('ZP_00711943','GO:0015893'),('ZP_00927253','GO:0015893'),('ZP_00927254','GO:0015893'),('ZP_00930809','GO:0015893'),('ZP_00965695','GO:0015893'),('ZP_00967075','GO:0015893'),('ZP_00969234','GO:0015893'),('ZP_00969235','GO:0015893'),('ZP_00983869','GO:0015893'),('AAC98719','GO:0016301'),('CAA30578','GO:0016301'),('CAA88266','GO:0016301'),('AAC98719','GO:0016310'),('CAA30578','GO:0016310'),('CAA88266','GO:0016310'),('AAA27471','GO:0016491'),('AAA16194','GO:0016740'),('AAA25680','GO:0016740'),('AAA25683','GO:0016740'),('AAC98719','GO:0016740'),('AAP74962','GO:0016740'),('AAS79146','GO:0016740'),('AAT38947','GO:0016740'),('AAU09447','GO:0016740'),('ABB99436','GO:0016740'),('ABO41023','GO:0016740'),('ABO46016','GO:0016740'),('BAA06249','GO:0016740'),('CAA30578','GO:0016740'),('CAA88266','GO:0016740'),('CAI40606','GO:0016740'),('YP_758627','GO:0016740'),('AAC98719','GO:0016773'),('CAA30578','GO:0016773'),('CAA88266','GO:0016773'),('CAA27626','GO:0016787'),('CAJ29622','GO:0016787'),('CAA27626','GO:0016788'),('CAJ29622','GO:0016788'),('ZP_00983916','GO:0022402'),('ZP_00983916','GO:0031968'),('AAA25683','GO:0034068'),('AAP74962','GO:0034068'),('AAS79146','GO:0034068'),('AAT38947','GO:0034068'),('ABB99436','GO:0034068'),('ABO46016','GO:0034068'),('BAA06249','GO:0034068'),('CAI40606','GO:0034068'),('YP_758627','GO:0034068'),('AAA16194','GO:0034069'),('AAA25680','GO:0034069'),('AAU09447','GO:0034069'),('ABO41023','GO:0034069'),('AAC98719','GO:0034071'),('CAA30578','GO:0034071'),('CAA88266','GO:0034071'),('AAL14441','GO:0042910'),('ABI90248','GO:0042910'),('ABO01902','GO:0042910'),('ABR81440','GO:0042910'),('ABR85446','GO:0042910'),('ABR86572','GO:0042910'),('BAA22228','GO:0042910'),('BAC94494','GO:0042910'),('CAJ77844','GO:0042910'),('EAY71134','GO:0042910'),('EAZ54783','GO:0042910'),('EAZ61950','GO:0042910'),('EDK55609','GO:0042910'),('EDK71791','GO:0042910'),('NP_521874','GO:0042910'),('YP_001025937','GO:0042910'),('YP_001025938','GO:0042910'),('YP_001078027','GO:0042910'),('YP_001345921','GO:0042910'),('YP_001345922','GO:0042910'),('YP_001348103','GO:0042910'),('YP_001350571','GO:0042910'),('YP_776583','GO:0042910'),('ZP_00711942','GO:0042910'),('ZP_00711943','GO:0042910'),('ZP_00927253','GO:0042910'),('ZP_00927254','GO:0042910'),('ZP_00930809','GO:0042910'),('ZP_00965695','GO:0042910'),('ZP_00967075','GO:0042910'),('ZP_00969234','GO:0042910'),('ZP_00969235','GO:0042910'),('ZP_00983869','GO:0042910'),('ZP_01993435','GO:0042910'),('AAL14441','GO:0043190'),('CAJ77844','GO:0043190'),('ZP_00983916','GO:0045023'),('AAD12753','GO:0055085'),('AAL14441','GO:0055085'),('AAL75559','GO:0055085'),('AAR14158','GO:0055085'),('ABI90248','GO:0055085'),('ABK74430','GO:0055085'),('ABO01902','GO:0055085'),('ABO30517','GO:0055085'),('ABR81440','GO:0055085'),('ABR85446','GO:0055085'),('ABR86572','GO:0055085'),('BAA22228','GO:0055085'),('BAC94494','GO:0055085'),('CAC21193','GO:0055085'),('CAF31521','GO:0055085'),('CAJ77844','GO:0055085'),('CAM91612','GO:0055085'),('EAY71134','GO:0055085'),('EAZ54783','GO:0055085'),('EAZ61950','GO:0055085'),('EDK55609','GO:0055085'),('EDK71791','GO:0055085'),('NP_521874','GO:0055085'),('YP_001025937','GO:0055085'),('YP_001025938','GO:0055085'),('YP_001078027','GO:0055085'),('YP_001345921','GO:0055085'),('YP_001345922','GO:0055085'),('YP_001348103','GO:0055085'),('YP_001350571','GO:0055085'),('YP_209652','GO:0055085'),('YP_776583','GO:0055085'),('ZP_00711942','GO:0055085'),('ZP_00711943','GO:0055085'),('ZP_00927254','GO:0055085'),('ZP_00930809','GO:0055085'),('ZP_00965695','GO:0055085'),('ZP_00967075','GO:0055085'),('ZP_00969234','GO:0055085'),('ZP_00969235','GO:0055085'),('ZP_00983869','GO:0055085'),('ZP_01993435','GO:0055085'),('AAF01499','GO:0090079'),('ABO25866','GO:0090079'),('ABO87315','GO:0090079'),('CAD20560','GO:0090079'),('AAL14441','GO:0098796'),('CAJ77844','GO:0098796');
+/*!40000 ALTER TABLE `protfunz` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `req`
+--
+
+DROP TABLE IF EXISTS `req`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `req` (
+  `res` varchar(10) NOT NULL,
+  `req` varchar(10) NOT NULL,
+  PRIMARY KEY (`res`,`req`),
+  KEY `req` (`req`),
+  CONSTRAINT `req_ibfk_1` FOREIGN KEY (`res`) REFERENCES `res` (`res_id`) ON UPDATE CASCADE,
+  CONSTRAINT `req_ibfk_2` FOREIGN KEY (`req`) REFERENCES `res` (`res_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `req`
+--
+
+LOCK TABLES `req` WRITE;
+/*!40000 ALTER TABLE `req` DISABLE KEYS */;
+INSERT INTO `req` VALUES ('ceob','ceoa'),('opcm','ceoa'),('ceoa','ceob'),('opcm','ceob'),('mdtf','mdte'),('mdte','mdtf'),('mexb','mexa'),('oprm','mexa'),('mexa','mexb'),('mexd','mexc'),('oprj','mexc'),('mexc','mexd'),('oprj','mexd'),('mexf','mexe'),('oprn','mexe'),('mexe','mexf'),('oprn','mexf'),('ceoa','opcm'),('ceob','opcm'),('mexc','oprj'),('mexd','oprj'),('mexa','oprm'),('mexb','oprm'),('mexe','oprn'),('mexf','oprn');
+/*!40000 ALTER TABLE `req` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `res`
+--
+
+DROP TABLE IF EXISTS `res`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `res` (
+  `res_id` varchar(10) NOT NULL,
+  `classe` varchar(15) NOT NULL,
+  `mut` varchar(50) NOT NULL,
+  PRIMARY KEY (`res_id`),
+  KEY `classe` (`classe`),
+  KEY `mut` (`mut`),
+  CONSTRAINT `res_ibfk_1` FOREIGN KEY (`classe`) REFERENCES `classe` (`class_id`) ON UPDATE CASCADE,
+  CONSTRAINT `res_ibfk_2` FOREIGN KEY (`mut`) REFERENCES `mut` (`tipo`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `res`
+--
+
+LOCK TABLES `res` WRITE;
+/*!40000 ALTER TABLE `res` DISABLE KEYS */;
+INSERT INTO `res` VALUES ('aac3iia','aac','Mutazione missenso'),('aac3vi','aac','Mutazione missenso'),('aac6iib','aac','Espansione di triplette'),('aadd','ant','Inserzione frameshift'),('adeb','adeabc','Delezione in frame'),('adec','adeabc','Mutazione missenso'),('ant2ia','ant','Mutazione missenso'),('ant2ib','ant','Mutazione nonsenso'),('ant3ia','ant','Mutazioni di splicing'),('aph3ia','aph','Inserzione frameshift'),('aph3ic','aph','Mutazioni di splicing'),('aph3via','aph','Delezione frameshift'),('aph6ia','aph','Delezione frameshift'),('ceoa','ceo','Mutazione nonsenso'),('ceob','ceo','Mutazioni di splicing'),('cml_e1','cml','Inserzione frameshift'),('erea','ere','Inserzione frameshift'),('ereb','ere','Mutazioni di splicing'),('lmra','mls_mfs','Inserzione frameshift'),('lmrb','mls_mfs','Mutazione missenso'),('lnua','lnu','Delezione in frame'),('mdte','mdt','Delezione frameshift'),('mdtf','mdt','Inserzione in frame'),('mexa','mex','Inserzione in frame'),('mexb','mex','Delezione in frame'),('mexc','mex','Espansione di triplette'),('mexd','mex','Inserzione frameshift'),('mexe','mex','Delezione in frame'),('mexf','mex','Mutazione nonsenso'),('norm','norm','Inserzione frameshift'),('opcm','ceo','Mutazione nonsenso'),('oprj','mex','Espansione di triplette'),('oprm','mex','Mutazione missenso'),('oprn','mex','Inserzione frameshift'),('pmra','pmra','Mutazione nonsenso'),('teta','tet_efflux','Espansione di triplette'),('tetb','tet_efflux','Inserzione in frame'),('tetd','tet_efflux','Delezione in frame'),('tete','tet_efflux','Inserzione frameshift'),('tetg','tet_efflux','Inserzione in frame'),('teth','tet_efflux','Espansione di triplette'),('tetj','tet_efflux','Mutazioni di splicing'),('tetk','tet_efflux','Mutazione missenso'),('tetm','tet_rpp','Espansione di triplette'),('teto','tet_rpp','Mutazione missenso'),('tett','tet_rpp','Espansione di triplette'),('tetv','tet_efflux','Inserzione in frame'),('tetw','tet_rpp','Inserzione in frame'),('tetx','tet_mod','Mutazioni di splicing');
+/*!40000 ALTER TABLE `res` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resant`
+--
+
+DROP TABLE IF EXISTS `resant`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `resant` (
+  `res` varchar(10) NOT NULL,
+  `ant` char(7) NOT NULL,
+  PRIMARY KEY (`res`,`ant`),
+  KEY `ant` (`ant`),
+  CONSTRAINT `resant_ibfk_1` FOREIGN KEY (`res`) REFERENCES `res` (`res_id`) ON UPDATE CASCADE,
+  CONSTRAINT `resant_ibfk_2` FOREIGN KEY (`ant`) REFERENCES `ant` (`ant_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resant`
+--
+
+LOCK TABLES `resant` WRITE;
+/*!40000 ALTER TABLE `resant` DISABLE KEYS */;
+INSERT INTO `resant` VALUES ('mexa','J01AA07'),('mexb','J01AA07'),('oprm','J01AA07'),('teta','J01AA07'),('tetb','J01AA07'),('tetd','J01AA07'),('tete','J01AA07'),('tetg','J01AA07'),('teth','J01AA07'),('tetj','J01AA07'),('tetk','J01AA07'),('tetm','J01AA07'),('teto','J01AA07'),('tett','J01AA07'),('tetv','J01AA07'),('tetw','J01AA07'),('tetx','J01AA07'),('mexa','J01AA12'),('mexb','J01AA12'),('norm','J01AA12'),('oprm','J01AA12'),('adeb','J01BA01'),('adec','J01BA01'),('ceoa','J01BA01'),('ceob','J01BA01'),('cml_e1','J01BA01'),('mexe','J01BA01'),('mexf','J01BA01'),('opcm','J01BA01'),('oprn','J01BA01'),('aac3vi','J01CA03'),('mexe','J01EA01'),('mexf','J01EA01'),('opcm','J01EA01'),('oprn','J01EA01'),('erea','J01FA01'),('ereb','J01FA01'),('mdte','J01FA01'),('mdtf','J01FA01'),('mexc','J01FA01'),('mexd','J01FA01'),('oprj','J01FA01'),('lmra','J01FF02'),('lmrb','J01FF02'),('lnua','J01FF02'),('aadd','J01GA01'),('ant3ia','J01GA01'),('aph6ia','J01GA01'),('norm','J01GA01'),('aac3iia','J01GB03'),('aac3vi','J01GB03'),('aac6iib','J01GB03'),('ant2ia','J01GB03'),('ant2ib','J01GB03'),('aph3ia','J01GB03'),('aph3ic','J01GB03'),('aph3via','J01GB03'),('aac3iia','J01GB04'),('aadd','J01GB04'),('ant2ia','J01GB04'),('ant2ib','J01GB04'),('aph3ia','J01GB04'),('aph3ic','J01GB04'),('aph3via','J01GB04'),('norm','J01GB04'),('norm','J01MA02'),('pmra','J01MA02');
+/*!40000 ALTER TABLE `resant` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resart`
+--
+
+DROP TABLE IF EXISTS `resart`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `resart` (
+  `res` varchar(10) NOT NULL,
+  `art` int(11) NOT NULL,
+  PRIMARY KEY (`res`,`art`),
+  KEY `art` (`art`),
+  CONSTRAINT `resart_ibfk_1` FOREIGN KEY (`res`) REFERENCES `res` (`res_id`) ON UPDATE CASCADE,
+  CONSTRAINT `resart_ibfk_2` FOREIGN KEY (`art`) REFERENCES `art` (`pmid`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resart`
+--
+
+LOCK TABLES `resart` WRITE;
+/*!40000 ALTER TABLE `resart` DISABLE KEYS */;
+INSERT INTO `resart` VALUES ('mdte',319453),('mdtf',319453),('tetg',1479961),('cml_e1',1648560),('tetx',1846135),('oprj',2118530),('aph3ic',2653965),('teto',2841293),('tetm',3020504),('ant2ia',3024112),('lnua',3091456),('tete',3241623),('aph3ia',4876466),('ereb',6304468),('teta',6310527),('tetb',6319234),('tetk',6657777),('tetd',7916584),('mexc',7968531),('teth',8109938),('mexa',8226684),('mexb',8226684),('oprm',8226684),('aac3vi',8385262),('aph3ic',8385262),('mexa',8540696),('mexb',8540696),('oprm',8540696),('mexd',8878035),('mexe',9044268),('mexf',9044268),('oprn',9044268),('tetw',9292992),('lmrb',9384377),('norm',9400512),('pmra',9631545),('tetv',9687386),('tetj',9838156),('erea',10582867),('lmra',10582867),('lnua',10582867),('ceoa',10952301),('aac3iia',11083623),('aac3vi',11083623),('aac6iib',11083623),('aadd',11083623),('ant2ia',11083623),('ant2ib',11083623),('ant3ia',11083623),('aph3ia',11083623),('aph3ic',11083623),('aph3via',11083623),('aph6ia',11083623),('teta',11381101),('tetb',11381101),('tetd',11381101),('tete',11381101),('tetg',11381101),('teth',11381101),('tetj',11381101),('tetk',11381101),('tetm',11381101),('teto',11381101),('tett',11381101),('tetv',11381101),('tetw',11381101),('tetx',11381101),('adeb',11709311),('adec',11709311),('ceob',15377793),('opcm',15377794);
+/*!40000 ALTER TABLE `resart` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resseq`
+--
+
+DROP TABLE IF EXISTS `resseq`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `resseq` (
+  `res` varchar(10) NOT NULL,
+  `seq` varchar(20) NOT NULL,
+  PRIMARY KEY (`res`,`seq`),
+  KEY `seq` (`seq`),
+  CONSTRAINT `resseq_ibfk_1` FOREIGN KEY (`res`) REFERENCES `res` (`res_id`) ON UPDATE CASCADE,
+  CONSTRAINT `resseq_ibfk_2` FOREIGN KEY (`seq`) REFERENCES `seq` (`seq_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resseq`
+--
+
+LOCK TABLES `resseq` WRITE;
+/*!40000 ALTER TABLE `resseq` DISABLE KEYS */;
+INSERT INTO `resseq` VALUES ('lmrb','AB000617'),('pmra','ABAF01000001'),('aph6ia','AF012543'),('tetj','AF038993'),('adec','AF370885'),('tetd','AF467073'),('tetw','AJ427421'),('teta','AJ628353'),('ant2ia','AJ871915'),('erea','AJ971344'),('tetb','AM412236'),('ant3ia','AY309066'),('teth','AY362554'),('ant2ia','AY507153'),('ant3ia','AY612612'),('aac3iia','AY663802'),('norm','BA000037'),('ceoa','CH482381'),('mexa','CH482383'),('oprj','CH482384'),('ceob','CP000441'),('tetv','CP000480'),('ceoa','CP000547'),('aac3vi','CP000604'),('mexa','CP000744'),('mexe','CP000744'),('mexf','CP000744'),('adeb','CT025812'),('aadd','D29979'),('cml_e1','DQ205477'),('ant3ia','DQ287356'),('cml_e1','DQ445306'),('ceob','DS264095'),('tetm','EF101931'),('teto','EF363199'),('tete','EF439629'),('ant3ia','EF467306'),('ant2ib','L06161'),('aac6iib','L06163'),('tett','L42544'),('tetx','M37699'),('aac3vi','M88012'),('mexc','NC_003296'),('tetk','NC_006871'),('lnua','NC_008351'),('ceoa','NC_008391'),('ceoa','NC_008835'),('ceob','NC_008835'),('ceob','NC_009079'),('mexb','NC_009656'),('mexd','NC_009656'),('oprm','NC_009656'),('oprn','NC_009656'),('ceoa','NZ_AAIQ02000013'),('mdte','NZ_AAJX01000005'),('mdtf','NZ_AAJX01000005'),('mexe','NZ_AAKV01000024'),('mexf','NZ_AAKV01000024'),('mexb','NZ_AAKV01000077'),('mexd','NZ_AAKV01000108'),('opcm','NZ_AAKY01000183'),('ceob','NZ_AAKY01000184'),('mdte','NZ_AAMK01000001'),('mdtf','NZ_AAMK01000001'),('norm','NZ_AAWQ01000512'),('ereb','X03988'),('aph3via','X07753'),('lmra','X59926'),('tetg','Y19118'),('aph3ic','Z48231');
+/*!40000 ALTER TABLE `resseq` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `riv`
+--
+
+DROP TABLE IF EXISTS `riv`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `riv` (
+  `cod` int(11) NOT NULL AUTO_INCREMENT,
+  `issue` int(11) NOT NULL,
+  `vol` int(11) NOT NULL,
+  `anno` year(4) NOT NULL,
+  `rivista` varchar(30) NOT NULL,
+  PRIMARY KEY (`cod`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `riv`
+--
+
+LOCK TABLES `riv` WRITE;
+/*!40000 ALTER TABLE `riv` DISABLE KEYS */;
+INSERT INTO `riv` VALUES (1,0,74,2007,'Proc Natl Acad Sci U S A'),(2,0,36,2012,'Microbiol Immunol'),(3,0,173,2001,'J Bacteriol'),(4,0,265,2000,'J Biol Chem'),(5,0,75,1999,'Gene'),(6,0,170,2008,'J Bacteriol'),(7,0,14,2006,'Nucleic Acids Res'),(8,0,43,2006,'Gene'),(9,0,215,1998,'Mol Gen Genet'),(10,0,219,1988,'Nature'),(11,0,189,2003,'Mol Gen Genet'),(12,0,11,2003,'Nucleic Acids Res'),(13,0,25,2003,'Gene'),(14,0,10,2003,'Plasmid'),(15,0,37,2013,'Antimicrob Agents Chemother'),(16,0,10,2013,'Mol Microbiol'),(17,0,175,2013,'J Bacteriol'),(18,0,57,2013,'Microbiol Rev'),(19,0,39,2005,'Antimicrob Agents Chemother'),(20,0,21,2006,'Mol Microbiol'),(21,0,23,2007,'Mol Microbiol'),(22,0,63,2007,'Appl Environ Microbiol'),(23,0,390,2007,'Nature'),(24,0,350,2007,'Lancet'),(25,0,42,1998,'Antimicrob Agents Chemother'),(26,0,1443,1998,'Biochim Biophys Acta'),(27,0,43,1999,'Antimicrob Agents Chemother'),(28,0,406,2000,'Nature'),(29,0,44,2000,'Antimicrob Agents Chemother'),(30,0,65,2001,'Microbiol Mol Biol Rev'),(31,0,45,2001,'Antimicrob Agents Chemother'),(32,0,101,2004,'Proc Natl Acad Sci U S A');
+/*!40000 ALTER TABLE `riv` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `seq`
+--
+
+DROP TABLE IF EXISTS `seq`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `seq` (
+  `seq_id` varchar(20) NOT NULL,
+  `nome_s` varchar(10) NOT NULL,
+  `bp` int(11) NOT NULL,
+  `tipo` enum('Cromosoma','Plasmide') NOT NULL,
+  `compl` enum('Y','N') NOT NULL,
+  `bat` int(11) NOT NULL,
+  PRIMARY KEY (`seq_id`),
+  KEY `bat` (`bat`),
+  CONSTRAINT `seq_ibfk_1` FOREIGN KEY (`bat`) REFERENCES `bat` (`bat_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `seq`
+--
+
+LOCK TABLES `seq` WRITE;
+/*!40000 ALTER TABLE `seq` DISABLE KEYS */;
+INSERT INTO `seq` VALUES ('AB000617','seq1',3258,'Cromosoma','Y',1423),('ABAF01000001','seq2',264,'Plasmide','Y',406562),('AF012543','seq3',1571,'Plasmide','Y',63846),('AF038993','seq4',991,'Plasmide','Y',584),('AF370885','seq5',3372,'Cromosoma','Y',470),('AF467073','seq6',1439,'Cromosoma','N',624),('AJ427421','seq8',3374,'Cromosoma','Y',831),('AJ628353','seq9',904,'Plasmide','Y',28901),('AJ871915','seq11',3932,'Cromosoma','Y',43765),('AJ971344','seq12',441,'Plasmide','Y',571),('AM412236','seq13',1322,'Plasmide','Y',28901),('AY309066','seq17',1651,'Cromosoma','Y',571),('AY362554','seq18',1574,'Cromosoma','Y',715),('AY507153','seq19',3164,'Plasmide','N',287),('AY612612','seq20',2216,'Plasmide','N',602),('AY663802','seq21',865,'Plasmide','Y',550),('BA000037','seq24',3584,'Cromosoma','N',196600),('CH482381','seq25',1872,'Plasmide','Y',350701),('CH482383','seq26',2480,'Cromosoma','Y',287),('CH482384','seq27',1866,'Plasmide','Y',287),('CP000441','seq28',1492,'Cromosoma','N',339670),('CP000480','seq29',3498,'Cromosoma','N',246196),('CP000547','seq30',2552,'Plasmide','N',320389),('CP000604','seq31',1562,'Plasmide','N',28901),('CP000744','seq32',3854,'Cromosoma','N',287),('CT025812','seq35',3799,'Cromosoma','Y',470),('D29979','seq36',3493,'Plasmide','N',1422),('DQ205477','seq40',1198,'Cromosoma','Y',602),('DQ287356','seq41',1050,'Cromosoma','N',287),('DQ445306','seq43',2695,'Cromosoma','N',287),('DS264095','seq45',948,'Plasmide','Y',320389),('EF101931','seq46',404,'Plasmide','N',1307),('EF363199','seq47',2127,'Plasmide','N',1314),('EF439629','seq48',690,'Cromosoma','Y',645),('EF467306','seq49',1750,'Plasmide','N',550),('L06161','seq51',2330,'Cromosoma','Y',287),('L06163','seq52',1210,'Cromosoma','Y',294),('L42544','seq53',1541,'Cromosoma','Y',1314),('M37699','seq56',1052,'Cromosoma','N',817),('M88012','seq58',1318,'Plasmide','Y',550),('NC_003296','seq61',3877,'Cromosoma','Y',267608),('NC_006871','seq62',3822,'Plasmide','Y',42858),('NC_008351','seq63',771,'Plasmide','Y',1286),('NC_008391','seq64',3780,'Cromosoma','Y',339670),('NC_008835','seq65',3205,'Cromosoma','Y',320389),('NC_009079','seq67',1427,'Plasmide','Y',320389),('NC_009656','seq68',3811,'Cromosoma','Y',287),('NZ_AAIQ02000013','seq72',1873,'Cromosoma','Y',320389),('NZ_AAJX01000005','seq73',1776,'Plasmide','Y',562),('NZ_AAKV01000024','seq75',2032,'Cromosoma','Y',287),('NZ_AAKV01000077','seq77',3688,'Plasmide','Y',287),('NZ_AAKV01000108','seq78',3649,'Plasmide','Y',287),('NZ_AAKY01000183','seq79',2261,'Plasmide','N',350701),('NZ_AAKY01000184','seq80',3440,'Cromosoma','Y',350701),('NZ_AAMK01000001','seq81',2851,'Cromosoma','Y',562),('NZ_AAWQ01000512','seq83',3857,'Cromosoma','N',419109),('X03988','seq86',3262,'Plasmide','N',562),('X07753','seq87',1330,'Plasmide','N',470),('X59926','seq90',2667,'Cromosoma','Y',1915),('Y19118','seq91',1124,'Cromosoma','Y',602),('Z48231','seq92',481,'Plasmide','Y',562);
+/*!40000 ALTER TABLE `seq` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `subclass`
+--
+
+DROP TABLE IF EXISTS `subclass`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `subclass` (
+  `sub_id` char(5) NOT NULL,
+  `nome_scl` varchar(100) NOT NULL,
+  `atc_cl` char(4) NOT NULL,
+  PRIMARY KEY (`sub_id`),
+  KEY `atc_cl` (`atc_cl`),
+  CONSTRAINT `subclass_ibfk_1` FOREIGN KEY (`atc_cl`) REFERENCES `atc` (`atc_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `subclass`
+--
+
+LOCK TABLES `subclass` WRITE;
+/*!40000 ALTER TABLE `subclass` DISABLE KEYS */;
+INSERT INTO `subclass` VALUES ('J01AA','Tetracicline','J01A'),('J01BA','Amfenicoli','J01B'),('J01CA','Penicilline ad ampio spettro','J01C'),('J01CE','Penicilline sensibili alle beta-lattamasi','J01C'),('J01CF','Penicilline beta-lattamasi resistenti','J01C'),('J01CG','Inibitori delle beta-lattamasi','J01C'),('J01CR','Combinazioni di penicilline, inclusi gli inibitori delle beta-lattamasi','J01C'),('J01DB','Cefalosporine di prima generazione','J01D'),('J01DC','Cefalosporine di seconda generazione','J01D'),('J01DD','Cefalosporine di terza generazione','J01D'),('J01DE','Cefalosporine di quarta generazione','J01D'),('J01DF','Monobattami','J01D'),('J01DH','Carbapenemi','J01D'),('J01DI','Altre cefalosporine e penems','J01D'),('J01EA','Trimetoprim e derivati','J01E'),('J01EB','Sulfonamidi a breve azione','J01E'),('J01EC','Sulfonamidi ad azione intermedia','J01E'),('J01ED','Sulfonamidi ad azione prolungata','J01E'),('J01EE','Combinazioni di sulfonamidi e trimethoprim, inclusi derivati','J01E'),('J01EQ','Sulfonamidi','J01E'),('J01EW','Combinazioni di sulfonamidi e trimetoprim, inclusi derivati','J01E'),('J01FA','Macrolidi','J01F'),('J01FF','Lincosamidi','J01F'),('J01FG','Streptogramine','J01F'),('J01GA','Streptomicine','J01G'),('J01GB','Altri amminoglicosidi','J01G'),('J01MA','Fluorochinoloni','J01M'),('J01MB','Altri chinoloni','J01M'),('J01MQ','Chinossaline','J01M');
+/*!40000 ALTER TABLE `subclass` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-06-18 13:34:25
