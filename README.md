@@ -35,21 +35,4 @@ Il progetto segue un'analisi strutturata che include:
 - `queries.sql`: Raccolta di 22 query SQL che dimostrano le potenzialità del database (Join multiple, Subquery, Grouping, Rollup).
 - `docs/`: Contiene la tesina completa `ResistanceBase.pdf` con i diagrammi E-R e le specifiche tecniche.
 
-## 🚀 Come utilizzare il database
-
-1. **Clona il repository**:
-   ```bash
-   git clone [https://github.com/aliceromeo/ResistanceBase.git](https://github.com/aliceromeo/ResistanceBase.git)
-
-2. **Importa lo schema** (il database viene automaticamente ricreato da zero, se già esistente):
-   ```sql
-   SOURCE schema.sql;
-
-3. **Carica i dati**:
-   ```sql
-   SOURCE data.sql;
-
-4. **Testa le analisi**:
-   ```sql
-   SOURCE queries.sql;
 
