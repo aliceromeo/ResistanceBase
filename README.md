@@ -41,7 +41,7 @@ Il progetto segue un'analisi strutturata che include:
    ```bash
    git clone [https://github.com/aliceromeo/ResistanceBase.git](https://github.com/aliceromeo/ResistanceBase.git)
 
-2. **Importa lo schema**:
+2. **Importa lo schema** (il database viene automaticamente ricreato da zero, se già esistente):
    ```sql
    SOURCE schema.sql;
 
