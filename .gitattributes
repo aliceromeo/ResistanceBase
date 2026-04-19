@@ -1,2 +1,2 @@
 # Force SQL for linguist
-scripts/*.sql linguist-language=SQL
+*.sql linguist-language=SQL
