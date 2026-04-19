@@ -43,8 +43,6 @@ Il progetto segue un'analisi strutturata che include:
 
 2. **Importa lo schema**:
    ```sql
-   CREATE DATABASE resistance_base;
-   USE resistance_base;
    SOURCE schema.sql;
 
 3. **Carica i dati**:
