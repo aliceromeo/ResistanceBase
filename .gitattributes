@@ -1,2 +1,2 @@
-# Force SQL for linguist
 *.sql linguist-language=SQL
+*.sql linguist-detectable=true
